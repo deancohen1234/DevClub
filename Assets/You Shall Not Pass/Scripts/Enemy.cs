@@ -7,6 +7,9 @@ public class Enemy : MonoBehaviour {
     public delegate void PlayerHit();
     public PlayerHit OnPlayerHit;
 
+    public delegate void EnemyDeath();
+    public EnemyDeath OnEnemyDeath;
+
     public Transform m_Target;
     public float m_Speed = 2f;
 
@@ -30,6 +33,7 @@ public class Enemy : MonoBehaviour {
         if (other.gameObject.tag == "DestructiveWall")
         {
             Destroy(this.gameObject);
+            OnEnemyDeath.Invoke();
         }
 
         else if (other.gameObject.tag == "Player")
